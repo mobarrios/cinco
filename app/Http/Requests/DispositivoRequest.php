@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UserCreateRequest extends Request
+class DispositivoRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,18 @@ class UserCreateRequest extends Request
     public function rules()
     {
         return [
-            'email'     => 'required|unique:users,email|max:255',
-            'name'      => 'required',
-            'password'  => 'required|max:255'
+            'codigo' => 'required|unique:dispositivo,codigo|max:255',
+            'descripcion' => 'required|max:255'
         ];
     }
 
-
+    /* mensajes particulares
+    public function messages()
+    {
+        return [
+            'codigo.required' => 'Codigo Requerido',
+            'codigo.unique' => 'Codigo Duplicado'
+        ];
+    }
+    */
 }

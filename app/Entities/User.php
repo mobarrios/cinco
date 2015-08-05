@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Http\Repositories\ProfileRepo;
 
 class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -32,4 +33,10 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function Perfil()
+    {
+        $profile = new ProfileRepo();
+        return $this->belongsTo($profile->getModel());
+    }
 }

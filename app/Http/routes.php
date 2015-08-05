@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Http\Controllers\Auth\AuthController ;
 
 Route::get('test',function()
 {
@@ -40,5 +41,15 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
 
 
+});
+
+Route::group(['prefix'=>'config'],function()
+{
+    Route::post('addUser',['as'=>'postUser','uses'=>'UsersController@postCreate']);
+    Route::get('del/{id}',['as'=>'delUser','uses'=>'UsersController@getDel']);
+
+    Route::get('user',function(){
+        return view('config/users');
+    });
 });
 

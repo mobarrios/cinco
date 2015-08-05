@@ -9,9 +9,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Entities\User;
 use App\Http\Repositories\UserRepo;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Helpers\Helper;
+use Illuminate\Http\Request;
 
 
 class UsersController extends Controller {
@@ -35,6 +37,22 @@ class UsersController extends Controller {
 
     dd($this->userRepo->find(1));
 
+    }
 
+    public function postCreate(UserCreateRequest $request)
+    {
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function getDel($id = null)
+    {
+        User::find($id)->delete();
+        return redirect()->back();
     }
 }
