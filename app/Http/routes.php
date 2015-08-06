@@ -12,36 +12,38 @@
 */
 use App\Http\Controllers\Auth\AuthController ;
 
-Route::get('test',function()
-{
-	Artisan::call('make:controller',['name'=>'App\Http\Controllers\PepitoController']);
-	Artisan::call('make:model',		['name'=>'App\Entities\PepitoModel']);
-	Artisan::call('make:migration',	['name'=>'PepitoMigration']);
-    	
-});
-
-//login
-Route::get('login',     ['as'=>'login','uses'=>'LoginController@getLogin']);
-Route::post('postLogin',['as'=>'postLogin','uses'=>'LoginController@postLogin']);
+    // lista de empresas para mejorar acceso
+    Route::get('',function(){
+       return view('company_list');
+    });
 
 
-Route::group(['middleware' => ['auth']], function()
-{
-    Route::get('/',    ['as'=>'home','uses'=>'HomeController@getIndex']);
-    Route::get('home', ['as'=>'home','uses'=>'HomeController@getIndex']);
+    //login pasa x middle company para chequear la empresa
+    Route::get('login/id={id}', ['middleware'=>['company'],'as'=>'login','uses'=>'LoginController@getLogin']);
 
-    Route::get('dispositivos',            ['middleware' => ['roles:dispostivo-listar'] , 'as'=>'dispositivos','uses'=>'DispositivosController@getIndex']);
-    Route::get('dispositivosEditar',      ['middleware' => ['roles:dispostivo-editar'] , 'as'=>'dispositivosEditar','uses'=>'DispositivosController@getEdit']);
-    Route::get('dispositivosBorrar/{id}', ['middleware' => ['roles:dispostivo-eliminar'] , 'as'=>'dispositivosDelete','uses'=>'DispositivosController@getDelete']);
-    Route::post('dispositivosEditarPost', ['middleware' => ['roles:dispositivo-editar'], 'as' => 'dispositivosEditPost','uses'=>'DispositivosController@postEdit']);
+    //pasa para cambiar la conexion a la db segun la empresa
+    Route::group(['middleware'=>'changeDb'],function(){
+
+        Route::post('postLogin',['as'=>'postLogin','uses'=>'LoginController@postLogin']);
+
+        Route::group(['middleware' => ['auth']], function()
+        {
+            Route::get('home', ['as'=>'home','uses'=>'HomeController@getIndex']);
+            Route::get('dispositivos',            ['middleware' => ['roles:dispostivo-listar'] , 'as'=>'dispositivos','uses'=>'DispositivosController@getIndex']);
+            Route::get('dispositivosEditar',      ['middleware' => ['roles:dispostivo-editar'] , 'as'=>'dispositivosEditar','uses'=>'DispositivosController@getEdit']);
+            Route::get('dispositivosBorrar/{id}', ['middleware' => ['roles:dispostivo-eliminar'] , 'as'=>'dispositivosDelete','uses'=>'DispositivosController@getDelete']);
+            Route::post('dispositivosEditarPost', ['middleware' => ['roles:dispositivo-editar'], 'as' => 'dispositivosEditPost','uses'=>'DispositivosController@postEdit']);
+
+            //logout
+            Route::get('logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
+
+        });
 
 
 
-    //logout
-    Route::get('logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
 
+    });
 
-});
 
 Route::group(['prefix'=>'config'],function()
 {
@@ -51,5 +53,15 @@ Route::group(['prefix'=>'config'],function()
     Route::get('user',function(){
         return view('config/users');
     });
+});
+
+
+//test
+Route::get('test',function()
+{
+    Artisan::call('make:controller',['name'=>'App\Http\Controllers\PepitoController']);
+    Artisan::call('make:model',		['name'=>'App\Entities\PepitoModel']);
+    Artisan::call('make:migration',	['name'=>'PepitoMigration']);
+
 });
 

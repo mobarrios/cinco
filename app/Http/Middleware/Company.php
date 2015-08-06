@@ -4,7 +4,12 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
+
 
 class Company
 {
@@ -17,15 +22,16 @@ class Company
         $this->company = $company;
     }
 
-    public function handle($request, Closure $next, $company_id)
+    public function handle($request, Closure $next)
     {
-        if($company_id != null)
+        $company_code = $request->id;
+
+        if($company_code != null)
         {
-            $data['company_id']     = $company_id;
-            $data['company_name']   = 'Nombre Empresa';
+          //  $company = \App\Entities\Company::where('code',$company_code)->first();
 
-            Session::put('company', $data);
-
+            Session::put('database', 'base');
+            Session::put('company_code','nav01');
         }
 
         return $next($request);

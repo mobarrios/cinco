@@ -20,7 +20,8 @@
 
     <footer class="footer">
         <div class="container">
-            FOOTER
+            {{Session::get('company_code')}}
+
         </div>
     </footer>
 

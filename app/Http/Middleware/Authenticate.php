@@ -44,7 +44,7 @@ class Authenticate
 
              } else {
 
-                return redirect()->guest('login');
+                return redirect()->guest('login/id='.Session::get('company_code'));
                 // return redirect('login');
             }
         }
