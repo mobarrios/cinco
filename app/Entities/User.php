@@ -34,9 +34,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function Perfil()
+
+    public function Profile()
     {
-        $profile = new ProfileRepo();
-        return $this->belongsTo($profile->getModel());
+        return $this->belongsTo(Profile::getClass(),'profiles_id');
     }
 }

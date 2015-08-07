@@ -29,31 +29,31 @@ use App\Http\Controllers\Auth\AuthController ;
         Route::group(['middleware' => ['auth']], function()
         {
             Route::get('home', ['as'=>'home','uses'=>'HomeController@getIndex']);
-            Route::get('dispositivos',            ['middleware' => ['roles:dispostivo-listar'] , 'as'=>'dispositivos','uses'=>'DispositivosController@getIndex']);
-            Route::get('dispositivosEditar',      ['middleware' => ['roles:dispostivo-editar'] , 'as'=>'dispositivosEditar','uses'=>'DispositivosController@getEdit']);
-            Route::get('dispositivosBorrar/{id}', ['middleware' => ['roles:dispostivo-eliminar'] , 'as'=>'dispositivosDelete','uses'=>'DispositivosController@getDelete']);
-            Route::post('dispositivosEditarPost', ['middleware' => ['roles:dispositivo-editar'], 'as' => 'dispositivosEditPost','uses'=>'DispositivosController@postEdit']);
+           // Route::get('dispositivos',            ['middleware' => ['roles:dispostivo-listar'] , 'as'=>'dispositivos','uses'=>'DispositivosController@getIndex']);
+
+            Route::get('crudo', ['as'=>'crud','uses'=>'CrudController@getIndex']);
+
+
 
             //logout
             Route::get('logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
-
         });
 
 
 
+        Route::group(['prefix'=>'config'],function()
+        {
+            Route::post('addUser',['as'=>'postUser','uses'=>'UsersController@postCreate']);
+            Route::get('del/{id}',['as'=>'delUser','uses'=>'UsersController@getDel']);
+
+            Route::get('user',function(){
+                return view('config/users');
+            });
+        });
+
 
     });
 
-
-Route::group(['prefix'=>'config'],function()
-{
-    Route::post('addUser',['as'=>'postUser','uses'=>'UsersController@postCreate']);
-    Route::get('del/{id}',['as'=>'delUser','uses'=>'UsersController@getDel']);
-
-    Route::get('user',function(){
-        return view('config/users');
-    });
-});
 
 
 //test

@@ -16,8 +16,12 @@ namespace App\Http\Controllers;
 
 class HomeController extends Controller {
 
-  public function getIndex()
-  {
-      return view('home');
-  }
+    public $view ;
+    public $data;
+
+    public function __construct()
+    {
+        $this->view = 'home';
+        $this->data['sectionName'] = 'HOME';
+    }
 }

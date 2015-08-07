@@ -8,7 +8,7 @@
 
 namespace App\Entities;
 
-use App\Http\Repositories\UserRepo;
+
 
 class Profile  extends Entity{
 
@@ -17,7 +17,6 @@ class Profile  extends Entity{
 
     public function User()
     {
-        $user = new UserRepo();
-        return $this->hasMany($user->getModel());
+        return $this->hasMany(User::getClass());
     }
 }

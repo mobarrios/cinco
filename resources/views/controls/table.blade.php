@@ -4,7 +4,9 @@
     <thead>
     <tr>
         <th style="width: 1%;">#</th>
-        <th></th>
+        @foreach($tableHeader as $column => $data)
+            <th>{{$column}}</th>
+        @endforeach
         <th style="width: 10%;" class="no-sort"></th>
     </tr>
     </thead>
@@ -22,7 +24,11 @@
     @foreach($models as $model)
         <tr>
             <td>#{{$model->id}}</td>
-            <td>{{$model->name}}</td>
+
+                @foreach($tableHeader as $column => $data)
+                    <td>{{$model->$data}}</td>
+                @endforeach
+
             <td class="">
                 <a href="" class="btn btn-xs btn-success">Edit</a>
                 <a href="" class="btn btn-xs btn-danger">Del</a>

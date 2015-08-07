@@ -14,21 +14,32 @@
 
     <!-- Begin page content -->
     <div class="container">
-    <h5>Branch:MASTER</h5>
+
+    <h4>nav { Coder }</h4>
         @yield('mainContent')
     </div>
 
     <footer class="footer">
-        <div class="container">
-            {{Session::get('company_code')}}
+        <div class="conteiner">
+            <div class="col-xs-6">
+                <span class="badge">Master</span>
+            </div>
+            <div class="col-xs-6">
+                <h4>{{Session::get('company_code')}}</h4>
+            </div>
+
 
         </div>
+
+
     </footer>
 
     </body>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
     <script src="assets/js/custom.js"></script>
 

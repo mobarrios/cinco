@@ -8,18 +8,19 @@
 
 namespace App\Http\Repositories;
 
-use App\Entities\User;
 
-class UserRepo extends BaseRepo {
+use App\Entities\Crud;
+
+class CrudRepo extends BaseRepo {
 
     public function getModel()
     {
-        return new User;
+        return new Crud();
     }
 
     public function ListAndPaginate($paginate = 50, $search = null)
     {
-        $qry = $this->model->orderBy('name')
+        $qry = $this->model->orderBy('profile')
             ->paginate($paginate);
 
         return $qry;
@@ -37,10 +38,9 @@ class UserRepo extends BaseRepo {
             'E-mail'=>'email',
             'Perfil'=>'Profile',
 
-        ];
+            ];
 
         return $header;
     }
-
 
 }
