@@ -15,7 +15,7 @@
     <!-- Begin page content -->
     <div class="container">
 
-    <h4>nav { Coder }</h4>
+    <h4>Brand</h4>
         @yield('mainContent')
     </div>
 

@@ -1,10 +1,8 @@
-
-
-<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+<table id="example" class="display table table-striped" style="width: 100%; cellspacing: 0;">
     <thead>
     <tr>
         <th style="width: 1%;">#</th>
-        @foreach($tableHeader as $column => $data)
+        @foreach($tableHeader['columns'] as $column => $data)
             <th>{{$column}}</th>
         @endforeach
         <th style="width: 10%;" class="no-sort"></th>
@@ -23,15 +21,21 @@
     <tbody>
     @foreach($models as $model)
         <tr>
-            <td>#{{$model->id}}</td>
+            <td>{{$model->id}}</td>
 
-                @foreach($tableHeader as $column => $data)
-                    <td>{{$model->$data}}</td>
+                @foreach($tableHeader['columns'] as $column)
+
+                    @if(!is_null($column['relation']))
+                        <td>{{$model->$column['data']->$column['relation']}}</td>
+                    @else
+                        <td>{{$model->$column['data']}}</td>
+                    @endif
+
                 @endforeach
 
             <td class="">
-                <a href="" class="btn btn-xs btn-success">Edit</a>
-                <a href="" class="btn btn-xs btn-danger">Del</a>
+                <a href="{{route($routeEdit,$model->id)}}" class="btn btn-xs btn-success">Edit</a>
+                <a href="{{route($routeDel ,$model->id)}}" class="delete btn btn-xs btn-danger">Del</a>
             </td>
         </tr>
     @endforeach

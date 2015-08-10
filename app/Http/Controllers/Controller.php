@@ -20,4 +20,15 @@ abstract class Controller extends BaseController
         return view($this->form)->with($this->data);
     }
 
+    public function getEdit($id)
+    {
+       $this->data['model'] = $this->repo->getModel()->find($id);
+        return view($this->form)->with($this->data);
+    }
+
+    public function getDel($id)
+    {
+        return "das";
+    }
+
 }

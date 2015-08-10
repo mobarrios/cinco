@@ -22,6 +22,6 @@ class HomeController extends Controller {
     public function __construct()
     {
         $this->view = 'home';
-        $this->data['sectionName'] = 'HOME';
+        $this->data['sectionName'] = 'Bienvenido';
     }
 }

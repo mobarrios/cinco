@@ -31,7 +31,9 @@ use App\Http\Controllers\Auth\AuthController ;
             Route::get('home', ['as'=>'home','uses'=>'HomeController@getIndex']);
            // Route::get('dispositivos',            ['middleware' => ['roles:dispostivo-listar'] , 'as'=>'dispositivos','uses'=>'DispositivosController@getIndex']);
 
-            Route::get('crudo', ['as'=>'crud','uses'=>'CrudController@getIndex']);
+            Route::get('c', ['as'=>'crud','uses'=>'CrudController@getIndex']);
+            Route::get('cE/{id}',['as'=>'crudGetEdit','uses'=>'CrudController@getEdit']);
+            Route::get('cD/{id}',['as'=>'crudGetDel','uses'=>'CrudController@getDel']);
 
 
 

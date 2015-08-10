@@ -10,20 +10,25 @@ use App\Http\Repositories\UserRepo as Repo;
 class CrudController extends Controller {
 
 
-    protected $repo;
+    public   $repo;
+    public   $view ;
+    public   $form;
+    public   $data;
 
-    public $view ;
-    public $form;
-    public $data;
 
     public function __construct(Repo $repo)
     {
+        $this->repo                 = $repo;
         $this->view                 = 'crud.index';
         $this->form                 = 'crud.form';
         $this->data['models']       = $repo->ListAll();
         $this->data['tableHeader']  = $repo->tableHeader();
         $this->data['sectionName']  = 'CRUD';
+        $this->data['routeEdit']    = 'crudGetEdit';
+        $this->data['routeDel']     = 'crudGetDel';
     }
+
+
 
 
 

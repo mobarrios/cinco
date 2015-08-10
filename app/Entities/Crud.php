@@ -6,7 +6,7 @@ class Crud extends Entity{
 
     protected $table = 'users';
 
-    public function Profile()
+    public function Perfil()
     {
         return $this->hasMany(Profile::getClass());
     }

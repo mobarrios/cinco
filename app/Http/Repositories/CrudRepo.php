@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mbarrios
- * Date: 3/7/15
- * Time: 12:42
- */
+
 
 namespace App\Http\Repositories;
 
@@ -34,10 +29,9 @@ class CrudRepo extends BaseRepo {
 
     public function tableHeader()
     {
-        $header  = ['Nombre'=>'name',
-            'E-mail'=>'email',
-            'Perfil'=>'Profile',
-
+        $header  = ['Nombrdasdadadasde'=>'name',
+            'E-dasdasdasmail'=>'email',
+            'Perfil'=>'Perfil',
             ];
 
         return $header;
